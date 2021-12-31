@@ -78,8 +78,8 @@ let xV, yV;
 xP = canvasEl.width / 2;
 yP = canvasEl.height / 2;
 
-xV = Math.floor(Math.random() * 201 + 99) / FPS;
-yV = Math.floor(Math.random() * 201 + 99) / FPS;
+xV = Math.floor(Math.random() * 501 + 99) / FPS;
+yV = Math.floor(Math.random() * 501 + 99) / FPS;
 
 // coin toss situation
 
@@ -101,12 +101,29 @@ function runGame() {
   // clearing the canvas
   canvasCTX.clearRect(0, 0, canvasEl.width, canvasEl.height);
 
+  // collision detection
+  // bottom
+  if (yV > 0 && yP >= canvasEl.height - radius - 5) {
+    yV = -yV;
+  }
+  // right
+  if (xV > 0 && xP >= canvasEl.width - radius - 5) {
+    xV = -xV;
+  }
+  // top
+  if (yV < 0 && yP <= radius + 5) {
+    yV = -yV;
+  }
+  // left
+  if (xV < 0 && xP <= radius + 5) {
+    xV = -xV;
+  }
   // draw the ball
   canvasCTX.beginPath();
-  canvasCTX.fillStyle = "red";
+  canvasCTX.fillStyle = "peachpuff";
   canvasCTX.arc(xP, yP, radius, 0, Math.PI * 2);
   canvasCTX.lineWidth = 10;
-  canvasCTX.strokeStyle = "black";
+  canvasCTX.strokeStyle = "cyan";
   canvasCTX.stroke();
   canvasCTX.fill();
 }
