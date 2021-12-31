@@ -76,7 +76,7 @@ let xP, yP;
 let xV, yV;
 
 xP = canvasEl.width / 2;
-yp = canvasEl.height / 2;
+yP = canvasEl.height / 2;
 
 xV = Math.floor(Math.random() * 201 + 99) / FPS;
 yV = Math.floor(Math.random() * 201 + 99) / FPS;
@@ -90,3 +90,25 @@ if (Math.floor(Math.random() * 2) === 0) {
 if (Math.floor(Math.random() * 2) === 0) {
   yV = -yV;
 }
+
+// the game loop
+
+function runGame() {
+  // moving the ball from its current position
+  xP += xV;
+  yP += yV;
+
+  // clearing the canvas
+  canvasCTX.clearRect(0, 0, canvasEl.width, canvasEl.height);
+
+  // draw the ball
+  canvasCTX.beginPath();
+  canvasCTX.fillStyle = "red";
+  canvasCTX.arc(xP, yP, radius, 0, Math.PI * 2);
+  canvasCTX.lineWidth = 10;
+  canvasCTX.strokeStyle = "black";
+  canvasCTX.stroke();
+  canvasCTX.fill();
+}
+
+setInterval(runGame, 1000 / FPS);
